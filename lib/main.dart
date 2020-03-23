@@ -29,7 +29,10 @@ class _Covid19State extends State<Covid19> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
+      theme: ThemeData.dark().copyWith(
+        primaryColor: Color(0xFF0A0E21),
+        scaffoldBackgroundColor: Color(0xFF0A0E21),
+      ),
       home:  Scaffold(
         appBar: AppBar(
           title: Text('Covid19'),
@@ -37,6 +40,8 @@ class _Covid19State extends State<Covid19> {
         body: returnPage(_currentIndex),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
+          backgroundColor: Colors.black12,
+          selectedItemColor: Colors.blueAccent,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.graphic_eq),
