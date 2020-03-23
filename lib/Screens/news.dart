@@ -10,7 +10,7 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text("page2"),
+      child: Text("News feature coming soon!"),
     );
   }
 }

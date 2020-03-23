@@ -23,3 +23,15 @@ const kNumberSubTextStyle = TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.w900
 );
+
+const kLabelIndia = TextStyle(
+    fontSize: 25,
+    fontWeight: FontWeight.w700,
+    color: Color(0xFF8D8E98),
+);
+
+const kNumberIndiaSubTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w500,
+  color: Color(0xFF8D8E98),
+);
