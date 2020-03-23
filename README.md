@@ -6,8 +6,8 @@ An application to keep people updated about the current status and progress of t
 
 ## Instructions to use
 ```
-Covid19 is a simple view-only statistics app, that keeps the user updated on the coronavirus spread and relevant statistics
-during the Covid19 pandemic.
+Covid19 is a simple view-only statistics app, that keeps the user updated on the coronavirus spread 
+and relevant statistics during the Covid19 pandemic.
 ```
 ## Helping you get started
 A few resources to get you started if this is your first Flutter project:
