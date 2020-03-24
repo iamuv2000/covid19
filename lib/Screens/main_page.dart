@@ -258,5 +258,4 @@ class _MainScreenState extends State<MainScreen> {
 
 //TODO: Refactor code
 //TODO: Integrate loading screen
-//TODO: Integrate location based update on the country widget to view country relevant statistics//TODO: Refactor code
 //TODO: Integrate location based update on the country widget to view country relevant statistics

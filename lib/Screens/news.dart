@@ -22,6 +22,10 @@ class _NewsScreenState extends State<NewsScreen> {
     getData();
   }
 
+  Future<Null> refresh() async{
+    await getData();
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,45 +42,48 @@ class _NewsScreenState extends State<NewsScreen> {
                 );
           }
           else{
-            return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index){
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Card(
-                      color: Colors.blueAccent.withOpacity(0.5),
-                      child: ListTile(
-                        title: Text(
-                            snapshot.data[index]['title'],
-                            style: TextStyle(
-                              fontSize: 20,
-                              letterSpacing: 1.2,
-                              color: Colors.white
-                            ),
-                        ),
-                          subtitle: Text(
-                              snapshot.data[index]['description'],
-                            style: TextStyle(
-                                fontSize: 14,
-                                letterSpacing: 0.9,
-                            ),
+            return RefreshIndicator(
+              onRefresh: refresh,
+              child: ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index){
+                    return Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Card(
+                        color: Colors.blueAccent.withOpacity(0.5),
+                        child: ListTile(
+                          title: Text(
+                              snapshot.data[index]['title'],
+                              style: TextStyle(
+                                fontSize: 20,
+                                letterSpacing: 1.2,
+                                color: Colors.white
+                              ),
                           ),
-                        trailing: Container(
-                          height: 50,
-                          child: Image.network(
-                            snapshot.data[index]['urlToImage'],
-                            scale: 1,
-                              filterQuality: FilterQuality.low,
+                            subtitle: Text(
+                                snapshot.data[index]['description'],
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  letterSpacing: 0.9,
+                              ),
+                            ),
+                          trailing: Container(
                             height: 50,
-                            fit: BoxFit.cover
+                            child: Image.network(
+                              snapshot.data[index]['urlToImage'],
+                              scale: 1,
+                                filterQuality: FilterQuality.low,
+                              height: 50,
+                              fit: BoxFit.fitHeight
+                            ),
                           ),
+                          isThreeLine: true,
+                          contentPadding: EdgeInsets.all(10.0),
                         ),
-                        isThreeLine: true,
-                        contentPadding: EdgeInsets.all(10.0),
                       ),
-                    ),
-                  );
-                }
+                    );
+                  }
+              ),
             );
           }
           }
@@ -85,4 +92,4 @@ class _NewsScreenState extends State<NewsScreen> {
     );
   }
 }
-//TODO: Integrate news api
+//TODO: Integrate news page
