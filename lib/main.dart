@@ -37,7 +37,12 @@ class _Covid19State extends State<Covid19> {
         appBar: AppBar(
           title: Text('Covid19'),
         ),
-        body: returnPage(_currentIndex),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 5.0),
+            child: returnPage(_currentIndex),
+          ),
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           backgroundColor: Colors.black12,

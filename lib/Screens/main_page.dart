@@ -155,6 +155,7 @@ class _MainScreenState extends State<MainScreen> {
             )
         ),
         Expanded(
+          flex: 2,
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -255,4 +256,3 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-//TODO: Fix overflow issue
