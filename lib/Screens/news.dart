@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:covid19/services/NetworkHelper.dart';
 
+//Import news article screen
+import 'news_article.dart';
 
 class NewsScreen extends StatefulWidget {
   @override
@@ -10,12 +12,15 @@ class NewsScreen extends StatefulWidget {
 class _NewsScreenState extends State<NewsScreen> {
 
   Future <List> getData() async {
-    NetworkHelper covidData = NetworkHelper('http://newsapi.org/v2/top-headlines?country=in&q=corona&from=2020-02-24&sortBy=publishedAt&apiKey=d9fa391aacfe428e81b8c6002ea8a507');
+    NetworkHelper covidData = NetworkHelper(
+        'http://newsapi.org/v2/top-headlines?country=in&q=corona&sortBy=publishedAt&apiKey=d9fa391aacfe428e81b8c6002ea8a507');
     var covidNews = await covidData.getData();
     var articles = covidNews['articles'];
     print(articles);
+
     return articles;
   }
+
 
   void initState() {
     super.initState();
@@ -24,6 +29,9 @@ class _NewsScreenState extends State<NewsScreen> {
 
   Future<Null> refresh() async{
     await getData();
+    setState(() {
+
+    });
     return null;
   }
 
@@ -49,36 +57,46 @@ class _NewsScreenState extends State<NewsScreen> {
                   itemBuilder: (BuildContext context, int index){
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
-                      child: Card(
-                        color: Colors.blueAccent.withOpacity(0.5),
-                        child: ListTile(
-                          title: Text(
-                              snapshot.data[index]['title'],
-                              style: TextStyle(
-                                fontSize: 20,
-                                letterSpacing: 1.2,
-                                color: Colors.white
-                              ),
-                          ),
-                            subtitle: Text(
-                                snapshot.data[index]['description'],
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 0.9,
-                              ),
+                      child: GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewsArticle(newsURL: snapshot.data[index]['url'],newsSource: snapshot.data[index]['source']['name'],newsTitle: snapshot.data[index]['title'],newsDescription: snapshot.data[index]['description'],),
                             ),
-                          trailing: Container(
-                            height: 50,
-                            child: Image.network(
-                              snapshot.data[index]['urlToImage'],
-                              scale: 1,
-                                filterQuality: FilterQuality.low,
+                          );
+                        },
+                        child: Card(
+                          color: Colors.blueAccent.withOpacity(0.5),
+                          child: ListTile(
+                            title: Text(
+                                snapshot.data[index]['title'],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  letterSpacing: 1.2,
+                                  color: Colors.white
+                                ),
+                            ),
+                              subtitle: Text(
+                                  snapshot.data[index]['description'],
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    letterSpacing: 0.9,
+                                ),
+                              ),
+                            trailing: Container(
                               height: 50,
-                              fit: BoxFit.fitHeight
+                              child: Image.network(
+                                snapshot.data[index]['urlToImage'],
+                                scale: 1,
+                                  filterQuality: FilterQuality.low,
+                                height: 50,
+                                fit: BoxFit.fitHeight
+                              ),
                             ),
+                            isThreeLine: true,
+                            contentPadding: EdgeInsets.all(10.0),
                           ),
-                          isThreeLine: true,
-                          contentPadding: EdgeInsets.all(10.0),
                         ),
                       ),
                     );
