@@ -68,35 +68,39 @@ class _NewsScreenState extends State<NewsScreen> {
                         },
                         child: Card(
                           color: Colors.blueAccent.withOpacity(0.5),
-                          child: ListTile(
-                            title: Text(
-                                snapshot.data[index]['title'],
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  letterSpacing: 1.2,
-                                  color: Colors.white
+
+                        child: SizedBox(
+                          height: 120,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                AspectRatio(
+                                  aspectRatio: 1.0,
+                                  child: Image.network(
+                                      snapshot.data[index]['urlToImage'],
+                                      scale: 1,
+                                      fit: BoxFit.cover
+                                  ),
                                 ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 2.0, 0.0),
+                                    child: Text(
+                                        snapshot.data[index]['title'],
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            letterSpacing: 1.2,
+                                            color: Colors.white
+                                        ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                              subtitle: Text(
-                                  snapshot.data[index]['description'],
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    letterSpacing: 0.9,
-                                ),
-                              ),
-                            trailing: Container(
-                              height: 50,
-                              child: Image.network(
-                                snapshot.data[index]['urlToImage'],
-                                scale: 1,
-                                  filterQuality: FilterQuality.low,
-                                height: 50,
-                                fit: BoxFit.fitHeight
-                              ),
-                            ),
-                            isThreeLine: true,
-                            contentPadding: EdgeInsets.all(10.0),
                           ),
+                        ),
                         ),
                       ),
                     );
